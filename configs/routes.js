@@ -14,13 +14,8 @@ const swaggerConfig = require("./swaggerConfig");
 
 module.exports = (app, express) => {
 
-  app.use("/api/users", user);
-//   app.use("/api/auth", auth);
-//   app.use("/api/subUsers", subUser);
+  app.use("/users", user);
 
-//   app.use("/api/org", organisation);
-//   app.use("/api/invoice", isModuleEnabled("invoices"), invoice);
-//   app.use("/api/client", isModuleEnabled("clientDashboard"), client);
 
    app.use('/api/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerConfig.swaggerSpec, { explorer: true }))
 
