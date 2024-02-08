@@ -15,6 +15,7 @@ const swaggerConfig = require("./swaggerConfig");
 module.exports = (app, express) => {
 
   app.use("/users", user);
+  
 
 
    app.use('/api/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerConfig.swaggerSpec, { explorer: true }))
