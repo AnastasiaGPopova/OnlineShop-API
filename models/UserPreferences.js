@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const countryAndTime = require('../util/contriesTimeZones.js')
+
 
 
 const userPreferencesSchema = new mongoose.Schema({
