@@ -18,12 +18,9 @@ function App() {
       <h5>User is {isAuthenticated ? "Logged in" : "Not logged in"} </h5>
 
        {isAuthenticated && (
-        <p>{JSON.stringify(user,null,2)}</p>
+        <pre style={{textAlign: "start"}}>{JSON.stringify(user,null,2)}</pre>
        )}
        
-
-
-
     </div>
 
 
