@@ -34,14 +34,7 @@ exports.authentication =  () => async  (req, res, next) => {
                 })
                 console.log(accessToken)
                 const userInfo = response.data
-                console.log(userInfo) 
-                const existingUser = await userManager.findUserByEmail(userInfo.email)
-                if(!existingUser){
-                    const newUser = await userManager.register(userInfo.email, userInfo.email_verified)
-                    console.log(newUser)
-                }
-                
-                
+                console.log(userInfo)                 
             } catch (error) {
                 console.log(error.message)
             }
