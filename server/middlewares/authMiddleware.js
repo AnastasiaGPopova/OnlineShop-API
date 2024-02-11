@@ -1,24 +1,28 @@
-const jwt = require('../lib/jsonwebtoken');
+const jwt = require('express-jwt');
+const jwks = require('jwks-rsa')
+const { auth } = require('express-oauth2-jwt-bearer');
+const axios = require('axios')
 const SECRET = 'victoriasecret';
 
-exports.authentication = () => async (req, res, next) => {
+
+const verifyJWT = auth({
+    audience: 'Backend of the react app created by Anastasia',
+    issuerBaseURL: 'https://dev-4iiixb26jwhgzjy2.us.auth0.com/',
+    tokenSigningAlg: 'RS256'
+  })
+
+exports.authentication =  () => async (req, res, next) => {
  
-
-    let numberS = "-1"
-    const index = req.rawHeaders.indexOf('X-Authorization')
-
-    // console.log(index)
-
-    if (index !== Number(numberS)) {
-        try {
-            const token = req.rawHeaders[index+1]
-            // console.log(token)
-            const decodedToken = await jwt.verify(token, SECRET);
-            req.user = decodedToken;
-        } catch(err) {
-            return console.log(err)
+    verifyJWT(req, res, next)
+    const accessToken = req.headers['x-authorization'].split(' ')[1]
+    const response = await axios.get('https://dev-4iiixb26jwhgzjy2.us.auth0.com/userinfo', {
+        headers: {
+            authorization: `Bearer ${accessToken}`
         }
-    }
-    
+    })
+    console.log(accessToken)
+    const userInfo = response.data
+    console.log(userInfo)
+
     next();
 };

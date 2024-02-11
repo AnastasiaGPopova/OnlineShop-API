@@ -16,8 +16,21 @@ function App() {
     // axios.get('http://localhost:5050/protected').then(response => console.log(response.data))
     //      .catch(error => console.log(error.message))
 
-    const token = await getAccessTokenSilently()
-    console.log(token)
+    try {
+      const token = await getAccessTokenSilently()
+      console.log(token)
+  
+      const response = await axios.get('http://localhost:5050/protected', {
+        headers: {
+          "X-Authorization": `Bearer ${token}`
+        }
+      })
+      console.log(response.data)
+      
+    } catch (error) {
+      console.log(error.message)
+    }
+
   }
 
 
