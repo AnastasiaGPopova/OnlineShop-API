@@ -2,10 +2,7 @@ const path = require('path');
 
 
 const user = require("../routing/user");
-//const subUser = require("../routing/subUser");
-// const organisation = require("../routing/organisation");
-// const invoice = require("../routing/invoice");
-// const client = require("../routing/client");
+const public = require("../routing/public");
 
 const swaggerUI = require("swagger-ui-express")
 const swaggerConfig = require("./swaggerConfig");

@@ -4,6 +4,11 @@ const parser = require('../utils/parser')
 const userManager = require('../managers/userManager');
 
 exports.getHome = async (req, res) => {
-    console.log(`Hello from public route`)
+    try {
+       console.log(`Hello from public route`)
+       res.send('Hello from public route')
+    } catch (error) {
+        
+    }
 };
 
