@@ -15,6 +15,7 @@ const swaggerConfig = require("./swaggerConfig");
 module.exports = (app, express) => {
 
   app.use("/users", user);
+  app.use('/public', public)
   
 
 
