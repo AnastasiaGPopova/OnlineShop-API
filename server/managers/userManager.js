@@ -38,7 +38,7 @@ exports.login = async (email, password) => {
 exports.register = async (email, emailVerified) => {
   try {
 
-    const newUser = await User.create({ email, emailVerified });
+    const newUser = await User.create({ email: email, emailVerified: emailVerified });
     const userPrefs = await userPrefsManager.createUserPrefs(newUser._id)
     newUser.save()
 
