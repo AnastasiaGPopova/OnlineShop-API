@@ -13,27 +13,26 @@ const userSchema = new mongoose.Schema({
     required: true,
     //match: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
   },
-  password: {
-    type: String,
-    required: true,
-    match: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])((?=.*\W)|(?=.*_))^[^ ]+$/,
-    minLength: [8, 'Password too short!!'],
-  },
-  firstName: {
-    type: String,
-    required: true,
-  },
-  lastName: {
-    type: String,
-    required: true,
-  },
+  // password: {
+  //   type: String,
+  //   required: true,
+  //   match: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])((?=.*\W)|(?=.*_))^[^ ]+$/,
+  //   minLength: [8, 'Password too short!!'],
+  // },
+  // firstName: {
+  //   type: String,
+  //   required: true,
+  // },
+  // lastName: {
+  //   type: String,
+  //   required: true,
+  // },
   isLocked: {
     type: Boolean,
     default: false,
   },
   emailVerified: {
     type: Boolean,
-    default: false,
   },
   closedAt: {
     type: Date,

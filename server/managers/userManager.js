@@ -1,70 +1,54 @@
-const bcrypt = require('bcrypt');
-const parser = require('../utils/parser')
+const bcrypt = require("bcrypt");
+const parser = require("../utils/parser");
 
-const jwt = require('../lib/jsonwebtoken');
-const User = require('../models/User');
+const jwt = require("../lib/jsonwebtoken");
+const User = require("../models/User");
+const userPrefsManager = require('../managers/userPrefsManager')
 
-const SECRET = 'victoriasecret';
+const SECRET = "victoriasecret";
 
 exports.login = async (email, password) => {
-    
-    try{
-
+  try {
     const user = await User.findOne({ email });
 
     if (!user) {
-        throw new Error('Invalid email or password');
+      throw new Error("Invalid email or password");
     }
 
-    const isValid = await user.validatePassword(password)
+    const isValid = await user.validatePassword(password);
 
-    if(!isValid){
-       throw new Error("Invalid password!")
+    if (!isValid) {
+      throw new Error("Invalid password!");
     }
-    
 
-    const payLoad = {_id: user._id, email: user.email}
+    const payLoad = { _id: user._id, email: user.email };
     const token = await jwt.sign(payLoad, SECRET);
 
     return {
-        _id: user._id,
-        email: user.email,
-        accessToken: token,
+      _id: user._id,
+      email: user.email,
+      accessToken: token,
     };
-
-}catch(error){
-    console.log(parser.parseError(error))
-    return (parser.parseError(error))
-}
+  } catch (error) {
+    console.log(parser.parseError(error));
+    return parser.parseError(error);
+  }
 };
 
-exports.register = async (email, password, rePassword, gender) => {
-    const existingUser = await User.findOne({ email });
+exports.register = async (email, emailVerified) => {
+  try {
 
-    try{
-        
-    if (existingUser) {
-        throw new Error('Email is already taken !');
-    }
+    const newUser = await User.create({ email, emailVerified });
+    const userPrefs = await userPrefsManager.createUserPrefs(newUser._id)
+    newUser.save()
 
-    if(!email || !password || !rePassword){
-        throw new Error('All fields are requiered!');
-    }
-
-    if(password !== rePassword){
-        throw new Error('Password missmatch!');
-    }
-
-    const newUser = await User.create({email, password, gender})
+    return newUser
 
 
-    return this.login(email, password)
-
-    }catch(error){
-        console.log(parser.parseError(error))
-        return (parser.parseError(error))
-    }
-
+  } catch (error) {
+    console.log(parser.parseError(error));
+    return parser.parseError(error);
+  }
 };
 
-exports.getCurrentUser = (email) => User.findOne({email})
+exports.findUserByEmail = (email) => User.findOne({ email });

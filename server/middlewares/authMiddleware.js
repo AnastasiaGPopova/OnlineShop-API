@@ -3,17 +3,20 @@ const jwks = require('jwks-rsa')
 const { auth } = require('express-oauth2-jwt-bearer');
 const axios = require('axios')
 const SECRET = 'victoriasecret';
-
-
-exports.isAuthenticatedUser = auth({
-    audience: 'Backend of the react app created by Anastasia',
-    issuerBaseURL: 'https://dev-4iiixb26jwhgzjy2.us.auth0.com/',
-    tokenSigningAlg: 'RS256'
-  })
+const userManager = require('../managers/userManager')
 
 
 
-exports.authentication =  () => async (req, res, next) => {
+exports.isAuthenticatedUser = (req, res, next) => {
+    auth({
+        audience: 'Backend of the react app created by Anastasia',
+        issuerBaseURL: 'https://dev-4iiixb26jwhgzjy2.us.auth0.com/',
+        tokenSigningAlg: 'RS256'
+    })(req, res, next);
+};
+
+
+exports.authentication =  () => async  (req, res, next) => {
  
     //verifyJWT(req, res, next)
     let numberS = "-1"
@@ -31,7 +34,14 @@ exports.authentication =  () => async (req, res, next) => {
                 })
                 console.log(accessToken)
                 const userInfo = response.data
-                console.log(userInfo)        
+                console.log(userInfo) 
+                const existingUser = await userManager.findUserByEmail(userInfo.email)
+                if(!existingUser){
+                    const newUser = await userManager.register(userInfo.email, userInfo.email_verified)
+                    console.log(newUser)
+                }
+                
+                
             } catch (error) {
                 console.log(error.message)
             }
