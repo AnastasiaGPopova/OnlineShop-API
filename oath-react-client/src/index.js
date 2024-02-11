@@ -10,10 +10,10 @@ root.render(
     <Auth0Provider
        domain="dev-4iiixb26jwhgzjy2.us.auth0.com"
        clientId="WznJjzPhrt57lOCO2KUGc8tIybooquyl"
-       redirectUri={window.location.origin}
-       audience='Backend of the react app created by Anastasia'
-       scope="openid profile email"
-    
+       authorizationParams={{
+        redirect_uri: window.location.origin,
+        audience: 'Backend of the react app created by Anastasia'
+      }}    
     >
       <App />
     </Auth0Provider>
