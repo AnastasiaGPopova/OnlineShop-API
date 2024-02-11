@@ -22,7 +22,7 @@ function App() {
   
       const response = await axios.get('http://localhost:5050/protected', {
         headers: {
-          "X-Authorization": `Bearer ${token}`
+          authorization: `Bearer ${token}`
         }
       })
       console.log(response.data)

@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 
 
-const { authentication } = require('./middlewares/authMiddleware');
+const { authentication, isAuthenticatedUser } = require('./middlewares/authMiddleware');
 const router = require("./configs/routes")
 const startMongo = require('./configs/mongo');
 const app = express();
@@ -16,7 +16,8 @@ async function start() {
   app.use(cors());
   app.use(express.urlencoded({extended: false}));
   app.use(express.json());
-  app.use(authentication())
+  app.use(isAuthenticatedUser)
+  //app.use(authentication())
 
   
   router(app, express)
