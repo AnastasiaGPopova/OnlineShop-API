@@ -5,7 +5,7 @@ const {isAuthenticatedUser} = require("../middlewares/authMiddleware")
 
 const protectedController = require('../controllers/protectedControler')
 
-protected.get('/', protectedController.getProtectedHome
+protected.get('/',isAuthenticatedUser, protectedController.getProtectedHome
 );
 
 

@@ -16,8 +16,8 @@ async function start() {
   app.use(cors());
   app.use(express.urlencoded({extended: false}));
   app.use(express.json());
-  app.use(isAuthenticatedUser)
-  //app.use(authentication())
+  //app.use(isAuthenticatedUser)
+  app.use(authentication())
 
   
   router(app, express)

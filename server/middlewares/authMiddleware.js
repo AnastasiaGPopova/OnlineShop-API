@@ -7,7 +7,8 @@ const SECRET = 'victoriasecret';
 
 exports.isAuthenticatedUser = auth({
     audience: 'Backend of the react app created by Anastasia',
-    issuerBaseURL: 'https://dev-4iiixb26jwhgzjy2.us.auth0.com/'
+    issuerBaseURL: 'https://dev-4iiixb26jwhgzjy2.us.auth0.com/',
+    tokenSigningAlg: 'RS256'
   })
 
 
