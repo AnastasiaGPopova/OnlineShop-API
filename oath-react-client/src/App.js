@@ -4,16 +4,20 @@ import axios from "axios"
 
 function App() {
 
-  const {loginWithPopup, loginWithRedirect,logout, user, isAuthenticated} = useAuth0()
+  const {loginWithPopup, loginWithRedirect,logout, 
+         user, isAuthenticated, getAccessTokenSilently} = useAuth0()
 
   function callPublicAPIRoute(){
     axios.get('http://localhost:5050/public').then(response => console.log(response.data))
          .catch(error => console.log(error.message))
   }
 
-  function callProtectedAPIRoute(){
-    axios.get('http://localhost:5050/protected').then(response => console.log(response.data))
-         .catch(error => console.log(error.message))
+  async function callProtectedAPIRoute(){
+    // axios.get('http://localhost:5050/protected').then(response => console.log(response.data))
+    //      .catch(error => console.log(error.message))
+
+    const token = await getAccessTokenSilently()
+    console.log(token)
   }
 
 
