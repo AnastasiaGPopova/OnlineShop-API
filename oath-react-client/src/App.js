@@ -1,9 +1,20 @@
 import './App.css';
 import {useAuth0} from '@auth0/auth0-react'
+import axios from "axios"
 
 function App() {
 
   const {loginWithPopup, loginWithRedirect,logout, user, isAuthenticated} = useAuth0()
+
+  function callPublicAPIRoute(){
+    axios.get('http://localhost:5050/public').then(response => console.log(response.data))
+         .catch(error => console.log(error.message))
+  }
+
+  function callProtectedAPIRoute(){
+    axios.get('http://localhost:5050/protected').then(response => console.log(response.data))
+         .catch(error => console.log(error.message))
+  }
 
 
   return (
@@ -17,9 +28,15 @@ function App() {
 
       <h5>User is {isAuthenticated ? "Logged in" : "Not logged in"} </h5>
 
+      <ul>
+        <li><button onClick={callPublicAPIRoute}>Call public API route</button></li>
+        <li><button onClick={callProtectedAPIRoute}>Call protected API route</button></li>
+      </ul>
+
        {isAuthenticated && (
         <pre style={{textAlign: "start"}}>{JSON.stringify(user,null,2)}</pre>
        )}
+       
        
     </div>
 
