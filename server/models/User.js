@@ -8,6 +8,10 @@ const userSchema = new mongoose.Schema({
     type: mongoose.Types.ObjectId,
     ref: 'userPref',
   },
+  authId: {
+    type: String,
+    required: true
+  },
   email: {
     type: String,
     required: true,
