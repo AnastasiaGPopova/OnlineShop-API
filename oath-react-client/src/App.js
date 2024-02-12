@@ -53,8 +53,6 @@ function App() {
        {isAuthenticated && (
         <pre style={{textAlign: "start"}}>{JSON.stringify(user,null,2)}</pre>
        )}
-       
-       
     </div>
 
 
