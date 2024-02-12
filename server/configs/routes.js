@@ -20,12 +20,16 @@ function base64URLEncode(str) {
 module.exports = (app, express) => {
   app.get('/auth/callback', async (req, res) => {
     console.log(`TESTSSSS`)
-    console.log(req)
+    console.log(req.originalUrl)
     const { code } = req.query;
     const { state } = req.query
 
     console.log(`CODE ${code}`)
     console.log(`STATE ${state}`)
+
+    let string = req.originalUrl
+    splited = string.split("state=")[1]
+    console.log(splited)
 
   
     // Exchange authorization code for access token
@@ -40,7 +44,8 @@ module.exports = (app, express) => {
           client_id: 'WznJjzPhrt57lOCO2KUGc8tIybooquyl',
           client_secret: '4gtHoTXmtTaZh1aMzcQMWUeTecKT-dlSfHhNZcTnnlqhghRKO8raNcUmMzVuyuC2',
           code,
-          redirect_uri: 'http://localhost:5050/auth/callback'
+          redirect_uri: 'http://localhost:5050/',
+          //code_verifier: "Vm5EamN2WUZZWG1ucjBTc0NiMGZtdW9RRU84Q3RiZERGbFc4c0tFRHkuUAA3DA3D"
         })
       };
 
