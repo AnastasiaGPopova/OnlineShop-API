@@ -40,14 +40,14 @@ module.exports = (app, express) => {
           client_id: 'WznJjzPhrt57lOCO2KUGc8tIybooquyl',
           client_secret: '4gtHoTXmtTaZh1aMzcQMWUeTecKT-dlSfHhNZcTnnlqhghRKO8raNcUmMzVuyuC2',
           code,
-          redirect_uri: 'http://localhost:5050/'
+          redirect_uri: 'http://localhost:5050/auth/callback'
         })
       };
 
       axios.request(options).then(function (response) {
         console.log(response.data);
       }).catch(function (error) {
-        //console.error(error);
+        console.error(error);
       });
 
 
