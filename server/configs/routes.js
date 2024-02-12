@@ -10,12 +10,7 @@ const swaggerUI = require("swagger-ui-express")
 const swaggerConfig = require("./swaggerConfig");
 const userManager = require('../managers/userManager')
 
-function base64URLEncode(str) {
-  return str.toString('base64')
-      .replace(/\+/g, '-')
-      .replace(/\//g, '_')
-      .replace(/=/g, '');
-}
+
 
 module.exports = (app, express) => {
   app.get('/auth/callback', async (req, res) => {
@@ -35,7 +30,7 @@ module.exports = (app, express) => {
     // Exchange authorization code for access token
     try {
 
-      var options = {
+      let options = {
         method: 'POST',
         url: 'https://dev-4iiixb26jwhgzjy2.us.auth0.com/oauth/token',
         headers: {'content-type': 'application/x-www-form-urlencoded'},
