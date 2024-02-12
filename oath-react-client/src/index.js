@@ -11,9 +11,9 @@ root.render(
        domain="dev-4iiixb26jwhgzjy2.us.auth0.com"
        clientId="WznJjzPhrt57lOCO2KUGc8tIybooquyl"
        authorizationParams={{
-        redirect_uri: 'http://localhost:5050/auth/callback',
+        //redirect_uri: 'http://localhost:5050/auth/callback',
+        redirect_uri: window.location.origin,
         audience: 'Backend of the react app created by Anastasia',
-        state:"xyzABC123"
       }}    
     >
       <App />
